@@ -1,11 +1,12 @@
-/* 1. DÉFINITION DES VARIABLES (La palette de couleurs) */
+/* 1. DÉFINITION DES VARIABLES */
 :root {
-    /* Mode Sombre (Par défaut) */
     --bg-body: #0b0e11;
     --bg-card: #1a1d23;
     --bg-item: #242830;
     --bg-badge: #2d323a;
     --text-main: #ffffff;
+    --text-title: #ffffff;
+    /* Pour tes titres de section */
     --text-body: #e0e0e0;
     --accent-color: #00ff88;
     --accent-hover: #00cc6e;
@@ -13,38 +14,34 @@
     --neon-shadow: rgba(0, 255, 136, 0.5);
 }
 
-/* 2. MODE CLAIR (On redéfinit les mêmes variables) */
 body.light-mode {
     --bg-body: #f4f7f6;
     --bg-card: #ffffff;
-    --bg-item: #fdfdfd;
+    --bg-item: #ebebeb;
     --bg-badge: #e8f5e9;
     --text-main: #1a1d23;
+    --text-title: #1a1d23;
+    /* Gris foncé en mode clair */
     --text-body: #444444;
     --accent-color: #008f4c;
-    /* Vert plus sombre pour le contraste */
     --accent-hover: #006b39;
     --shadow-main: rgba(0, 0, 0, 0.1);
     --neon-shadow: rgba(0, 143, 76, 0.2);
 }
 
-/* Style général */
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     padding: 40px 0;
     min-height: 100vh;
     background-color: var(--bg-body);
     color: var(--text-body);
     margin: 0;
-    overflow-y: auto;
     font-family: sans-serif;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* La carte de profil */
 .card {
     background: var(--bg-card);
     color: var(--text-main);
@@ -56,13 +53,6 @@ body {
     border-left: 4px solid var(--accent-color);
     box-shadow: -10px 0 20px var(--neon-shadow), 0 10px 30px var(--shadow-main);
     animation: neon-breath 4s infinite ease-in-out;
-    transition: background 0.3s ease;
-}
-
-.cv-section,
-.skills-grid {
-    text-align: left;
-    margin-top: 30px;
 }
 
 .profile-pic {
@@ -71,6 +61,7 @@ body {
     border-radius: 50%;
     border: 3px solid var(--accent-color);
     margin-bottom: 15px;
+    object-fit: cover;
 }
 
 h1 {
@@ -90,7 +81,6 @@ h1 {
     line-height: 1.5;
 }
 
-/* Badges de compétences */
 .skills span {
     background: var(--bg-badge);
     color: var(--accent-color);
@@ -102,7 +92,6 @@ h1 {
     display: inline-block;
 }
 
-/* Le bouton "Me contacter" avec effet de grossissement */
 .btn {
     display: inline-block;
     margin-top: 20px;
@@ -112,48 +101,55 @@ h1 {
     font-weight: bold;
     text-decoration: none;
     border-radius: 5px;
-
-    /* On assure la fluidité du grossissement */
-    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-/* L'effet au survol (identique à LinkedIn) */
 .btn:hover {
     background-color: var(--accent-hover);
     transform: scale(1.1);
-    /* Grossit de 10% (un peu moins que l'icône pour rester élégant) */
-    box-shadow: 0 5px 15px var(--neon-shadow);
-    /* Ajoute un petit halo lumineux */
 }
 
-/* Effet quand on clique */
-.btn:active {
-    transform: scale(0.95);
-    /* Se rétracte légèrement sous le clic */
+/* --- SECTION PARCOURS & SKILLS --- */
+.cv-section h3,
+.skills-grid h3 {
+    color: var(--text-title);
+    font-size: 1.4em;
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--bg-badge);
+    padding-bottom: 5px;
 }
 
-.cv-section h3 {
-    margin-top: 10px;
-    color: var(--accent-color);
-    margin-bottom: 15px;
-    color: #fdfdfd;
-}
-
-.cv-item {
+.cv-item,
+.skill-card {
     margin-bottom: 20px;
     padding: 15px;
     border-left: 3px solid var(--accent-color);
     background: var(--bg-item);
     border-radius: 0 10px 10px 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-        /* Fluidité de l'effet */
-        cursor: default;
-        /* Indique que c'est une zone interactive */
+    text-align: left;
 }
 
-.cv-item h4 {
-    margin: 0;
+/* L'EFFET DE DÉCALAGE LATÉRAL (X) */
+.cv-item:hover,
+.skill-card:hover {
+    transform: translateX(10px);
+    /* Se décale de 10px vers la droite */
+    box-shadow: 0 5px 15px var(--shadow-main);
+}
+
+.cv-item h4,
+.skill-name {
     color: var(--accent-color);
+    font-weight: bold;
+    margin: 0;
+}
+
+.skill-name {
+    display: block;
+    margin-bottom: 5px;
 }
 
 .badge-date {
@@ -165,17 +161,16 @@ h1 {
     color: var(--accent-color);
 }
 
-.cv-item p {
-    font-size: 0.95rem;
-    color: var(--text-body);
-    margin-top: 5px;
-}
-
 .company {
     font-size: 0.85rem;
     font-weight: bold;
     font-style: italic;
     color: var(--accent-color);
+}
+
+.skill-desc {
+    color: var(--text-body);
+    font-size: 0.9rem;
 }
 
 .skills-wrapper {
@@ -185,71 +180,32 @@ h1 {
     margin-top: 20px;
 }
 
-.skill-card {
-    background: var(--bg-item);
-    padding: 15px;
-    border-radius: 10px;
-    border-left: 3px solid var(--accent-color);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-        /* Fluidité de l'effet */
-        cursor: default;
-        /* Indique que c'est une zone interactive */
-}
-
-.skill-name {
-    display: block;
-    font-weight: bold;
-    color: var(--accent-color);
-    margin-bottom: 5px;
-}
-
-.skill-desc {
-    color: var(--text-body);
-    line-height: 1.2;
-    font-size: 0.9rem;
-}
-
-/* Social */
-.social-links svg {
-    fill: var(--accent-color);
-}
-
+/* --- SOCIAL & THEME --- */
 .social-links {
     margin-top: 15px;
 }
 
-/* On cible le lien autour de l'icône */
 .social-links a {
     display: inline-block;
-    /* Permet la transformation physique */
     transition: transform 0.3s ease;
     line-height: 0;
-    /* Aligne parfaitement l'icône */
-    text-decoration: none;
 }
 
-/* L'effet de grossissement au survol */
 .social-links a:hover {
     transform: scale(1.2);
-    /* Grossit de 20% */
 }
 
-/* On s'assure que le SVG hérite bien de la couleur de la variable */
 .social-links svg {
     fill: var(--accent-color);
-    transition: fill 0.3s ease;
     width: 30px;
-    /* Ajuste la taille si besoin */
     height: 30px;
+    transition: fill 0.3s ease;
 }
 
-/* Optionnel : changement de couleur au survol pour plus de peps */
 .social-links a:hover svg {
     fill: var(--accent-hover);
 }
 
-/* Bouton Thème */
 .theme-btn {
     position: fixed;
     top: 20px;
@@ -272,12 +228,4 @@ h1 {
     50% {
         box-shadow: -12px 0 30px var(--neon-shadow), 0 10px 30px var(--shadow-main);
     }
-}
-/* L'effet au survol (Hover) */
-.cv-item:hover,
-.skill-card:hover {
-    transform: translateX(-5px);
-    /* La carte monte de 5 pixels */
-    box-shadow: 0 10px 20px var(--shadow-main);
-    /* L'ombre devient plus diffuse */
 }
