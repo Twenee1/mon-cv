@@ -1,82 +1,100 @@
+/* 1. DÉFINITION DES VARIABLES (La palette de couleurs) */
+:root {
+    /* Mode Sombre (Par défaut) */
+    --bg-body: #0b0e11;
+    --bg-card: #1a1d23;
+    --bg-item: #242830;
+    --bg-badge: #2d323a;
+    --text-main: #ffffff;
+    --text-body: #e0e0e0;
+    --accent-color: #00ff88;
+    --accent-hover: #00cc6e;
+    --shadow-main: rgba(0, 0, 0, 0.5);
+    --neon-shadow: rgba(0, 255, 136, 0.5);
+}
+
+/* 2. MODE CLAIR (On redéfinit les mêmes variables) */
+body.light-mode {
+    --bg-body: #f4f7f6;
+    --bg-card: #ffffff;
+    --bg-item: #fdfdfd;
+    --bg-badge: #e8f5e9;
+    --text-main: #1a1d23;
+    --text-body: #444444;
+    --accent-color: #008f4c;
+    /* Vert plus sombre pour le contraste */
+    --accent-hover: #006b39;
+    --shadow-main: rgba(0, 0, 0, 0.1);
+    --neon-shadow: rgba(0, 143, 76, 0.2);
+}
+
 /* Style général */
 body {
     display: flex;
     flex-direction: column;
-    /* Aligne tout verticalement */
     align-items: center;
-    /* Centre horizontalement */
     justify-content: flex-start;
-    /* Aligne en haut pour ne rien couper */
     padding: 40px 0;
-    /* Ajoute de l'espace en haut et en bas */
     min-height: 100vh;
-    /* Prend toute la hauteur de l'écran minimum */
-    background-color: #0b0e11;
-    color: #e0e0e0;
+    background-color: var(--bg-body);
+    color: var(--text-body);
     margin: 0;
     overflow-y: auto;
-    /* Active le scroll vertical si besoin */
+    font-family: sans-serif;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* La carte de profil */
 .card {
-    background:#1a1d23;
-    color: #ffffff;
+    background: var(--bg-card);
+    color: var(--text-main);
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     width: 90%;
-    /* S'adapte aux petits écrans */
     max-width: 650px;
-    /* Largeur max pour que ce soit lisible */
     text-align: center;
-    /*Effet neon*/
-    border-top: none;
-        border-left: 4px solid #00ff88;
-        box-shadow: -10px 0 20px rgba(0, 255, 136, 0.5),
-            0 10px 30px rgba(0, 0, 0, 0.5);
+    border-left: 4px solid var(--accent-color);
+    box-shadow: -10px 0 20px var(--neon-shadow), 0 10px 30px var(--shadow-main);
     animation: neon-breath 4s infinite ease-in-out;
+    transition: background 0.3s ease;
 }
 
-/* On s'assure que le contenu du CV est aligné à gauche pour la lecture */
 .cv-section,
 .skills-grid {
     text-align: left;
     margin-top: 30px;
 }
 
-/* L'image de profil */
 .profile-pic {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 3px solid #00ff88;
+    border: 3px solid var(--accent-color);
     margin-bottom: 15px;
 }
 
-/* Titres et textes */
 h1 {
+    color: var(--text-main);
     margin: 10px 0;
-    color: #e0e0e0;
 }
 
 .job-title {
-    color: #00ff88;
+    color: var(--accent-color);
     font-weight: bold;
     margin-bottom: 20px;
 }
 
 .description {
-    color: #e0e0e0;
+    color: var(--text-body);
     font-size: 0.9em;
     line-height: 1.5;
 }
 
-/* Les badges de compétences */
+/* Badges de compétences */
 .skills span {
-    background: #2d323a;
-    color: #00ff88;
-    border: 1px solid #00ff88;
+    background: var(--bg-badge);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 0.8em;
@@ -89,8 +107,8 @@ h1 {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #00ff88;
-    color: #0b0e11;
+    background-color: var(--accent-color);
+    color: var(--bg-body);
     font-weight: bold;
     text-decoration: none;
     border-radius: 5px;
@@ -98,58 +116,50 @@ h1 {
 }
 
 .btn:hover {
-    background-color: #00cc6e;
-}
-
-.cv-container {
-    margin-top: 0;
-    /* Supprime la marge extérieure en haut */
-    padding-top: 0;
-    /* Supprime l'espace intérieur en haut */
-    border-top: none;
-    /* SUPPRIME LE TRAIT GRIS */
+    background-color: var(--accent-hover);
 }
 
 .cv-section h3 {
     margin-top: 10px;
-    color: #00ff88;
-    /* Espace réduit au dessus du titre "Mon Parcours" */
+    color: var(--accent-color);
     margin-bottom: 15px;
-    /* Espace sous le titre */
 }
 
 .cv-item {
     margin-bottom: 20px;
-    padding-left: 15px;
-    border-left: 3px solid #00ff88;
-    background: #242830;
+    padding: 15px;
+    border-left: 3px solid var(--accent-color);
+    background: var(--bg-item);
+    border-radius: 0 10px 10px 0;
 }
 
 .cv-item h4 {
     margin: 0;
-    color: #00ff88;
+    color: var(--accent-color);
 }
 
 .badge-date {
     font-size: 0.8rem;
-    background: #2d323a;
-    border: 1px solid #00ff88;
+    background: var(--bg-badge);
+    border: 1px solid var(--accent-color);
     padding: 2px 8px;
     border-radius: 10px;
-    color: #00ff88;
+    color: var(--accent-color);
 }
 
 .cv-item p {
     font-size: 0.95rem;
-    color: #e0e0e0;
+    color: var(--text-body);
     margin-top: 5px;
 }
+
 .company {
     font-size: 0.85rem;
     font-weight: bold;
-    margin: 2px 0;
     font-style: italic;
+    color: var(--accent-color);
 }
+
 .skills-wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -158,65 +168,56 @@ h1 {
 }
 
 .skill-card {
-    background: #242830;
+    background: var(--bg-item);
     padding: 15px;
     border-radius: 10px;
-    border-left: 3px solid #00ff88;
+    border-left: 3px solid var(--accent-color);
     text-align: center;
-    transition: box-shadow 0.3s ease;
-}
-
-.skill-card:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .skill-name {
     display: block;
     font-weight: bold;
-    color: #00ff88;
+    color: var(--accent-color);
     margin-bottom: 5px;
 }
 
 .skill-desc {
-    color: #e0e0e0;
+    color: var(--text-body);
     line-height: 1.2;
+    font-size: 0.9rem;
 }
 
-/* L'icône LinkedIn */
+/* Social */
 .social-links svg {
-    fill: #00ff88;
-    /* On passe l'icône en vert aussi */
+    fill: var(--accent-color);
 }
 
 .social-links {
-    margin-top: 10px;
-    /* Espace entre le bouton bleu et l'icône LinkedIn */
-    margin-bottom: 0;
-    /* Supprime l'espace sous l'icône LinkedIn */
+    margin-top: 15px;
 }
 
-.social-links a {
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.social-links a:hover {
-    transform: scale(1.2);
-    /* L'icône grossit légèrement au survol */
-    opacity: 0.8;
+/* Bouton Thème */
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    background: var(--bg-card);
+    cursor: pointer;
+    z-index: 1000;
 }
 
 @keyframes neon-breath {
-    0% {
-        box-shadow: -5px 0 15px rgba(0, 255, 136, 0.2), 0 10px 30px rgba(0, 0, 0, 0.5);
+
+    0%,
+    100% {
+        box-shadow: -5px 0 15px var(--neon-shadow), 0 10px 30px var(--shadow-main);
     }
 
     50% {
-        /* On augmente le flou (30px) et l'opacité (0.6) pour que ça brille fort */
-        box-shadow: -12px 0 30px rgba(0, 255, 136, 0.6), 0 10px 30px rgba(0, 0, 0, 0.5);
-        border-left-color: #55ffad;
-    }
-
-    100% {
-        box-shadow: -5px 0 15px rgba(0, 255, 136, 0.2), 0 10px 30px rgba(0, 0, 0, 0.5);
+        box-shadow: -12px 0 30px var(--neon-shadow), 0 10px 30px var(--shadow-main);
     }
 }
